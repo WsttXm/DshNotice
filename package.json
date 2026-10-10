@@ -1,0 +1,36 @@
+{
+  "name": "dsh-notice-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Native macOS notifications for the DeepSeek Harness desktop application: a banner when the agent needs you, and when a turn finishes",
+  "type": "module",
+  "license": "MIT",
+  "author": "WsttXm",
+  "homepage": "https://github.com/WsttXm/DshNotice#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WsttXm/DshNotice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WsttXm/DshNotice/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "notifications",
+    "macos",
+    "electron"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test packages/dsh-notice/test/*.test.mjs test/*.test.mjs",
+    "plugin:install": "node plugin.mjs install",
+    "plugin:uninstall": "node plugin.mjs uninstall",
+    "plugin:status": "node plugin.mjs status"
+  }
+}

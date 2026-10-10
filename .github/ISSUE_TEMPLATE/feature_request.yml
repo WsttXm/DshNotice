@@ -1,0 +1,34 @@
+name: 功能建议 / Feature request
+description: 希望插件多提醒什么、少提醒什么，或者支持别的平台
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你遇到的问题
+      description: 描述场景，而不是直接给方案——这样更容易找到合适的做法。
+      placeholder: 我同时开三个会话跑长任务，横幅弹出时分不清是哪一个。
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 你希望它怎么做
+    validations:
+      required: false
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 这个建议偏向
+      options:
+        - 通知的触发时机
+        - 通知的内容与文案
+        - 偏好设置项
+        - 安装 / 卸载体验
+        - 其他平台（Windows / Linux）
+        - 其他
+    validations:
+      required: true

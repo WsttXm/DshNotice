@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["20", "22", "24"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Run the client bundle test suite
+        run: npm test
+
+  installer:
+    name: Installer CLI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check the installer against a throw-away profile
+        run: |
+          set -euo pipefail
+          home="$RUNNER_TEMP/dsh-home"
+          profile="$home/profiles/desktop"
+          mkdir -p "$profile"
+          printf '{ "name": "desktop", "private": true }\n' > "$profile/package.json"
+          printf '[]\n' > "$profile/cordis.patch.yml"
+
+          node plugin.mjs install --home "$home" --dry-run
+          node plugin.mjs install --home "$home"
+          node plugin.mjs status  --home "$home" | tee status.txt
+          grep -q 'row installed  : yes' status.txt
+          grep -q 'package linked : yes' status.txt
+
+          node plugin.mjs uninstall --home "$home"
+          node plugin.mjs status    --home "$home" | tee status.txt
+          grep -q 'row installed  : no' status.txt

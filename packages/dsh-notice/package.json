@@ -1,0 +1,47 @@
+{
+  "name": "dsh-notice",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Native macOS notifications for DeepSeek Harness: a banner when the agent needs you (approval, question, plan review) and when a turn finishes",
+  "license": "MIT",
+  "author": "WsttXm",
+  "homepage": "https://github.com/WsttXm/DshNotice#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WsttXm/DshNotice.git",
+    "directory": "packages/dsh-notice"
+  },
+  "bugs": {
+    "url": "https://github.com/WsttXm/DshNotice/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "notifications",
+    "macos"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-ui-session"
+      ]
+    }
+  }
+}
